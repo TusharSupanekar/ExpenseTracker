@@ -135,6 +135,7 @@ function Signup(){
                           <input 
                           className="field" 
                           type="password" 
+                          name="confirmPassword"
                           value={formData.confirmPassword}
                           placeholder="Confirm password"
                           onChange={handleChange}/>
