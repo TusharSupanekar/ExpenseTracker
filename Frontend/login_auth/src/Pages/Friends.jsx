@@ -92,7 +92,7 @@ function Friends() {
     if (UserId) {
       fetchUserProfileAndFriends(UserId);
     }
-  }, [UserId]);
+  }, [UserId]);                                  
   
   useEffect(() => {
     const storedUsername = Cookies.get('username');

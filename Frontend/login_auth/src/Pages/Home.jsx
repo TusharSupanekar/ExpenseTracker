@@ -193,6 +193,25 @@ function Home() {
           </div>
         )}
 
+
+        <div className="card">
+          <div className="card-inner">
+            <h3>Monthly Budget</h3>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-inner">
+            <h3>Total Expense</h3>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-inner">
+            <h3>Total Savings</h3>
+          </div>
+        </div>
+
         <div className="main-title">
           <h1 className="h1">Graphical Insights</h1>
         </div>
