@@ -16,6 +16,7 @@
 
 .sidebar-brand {
   display: flex;
+  min-width: 0;
   align-items: center;
   gap: 10px;
 }
@@ -39,9 +40,11 @@
   font-family: Arial, sans-serif;
   font-size: 12px;
   letter-spacing: 0.1em;
+  white-space: nowrap;
 }
 
 .sidebar-close {
+  flex: 0 0 32px;
   display: none;
   width: 32px;
   height: 32px;
@@ -120,6 +123,10 @@
     z-index: 19;
     display: block;
     background: rgba(15, 23, 42, 0.42);
+  }
+
+  #sidebar.sidebar-responsive {
+    width: min(248px, 86vw) !important;
   }
 }
   

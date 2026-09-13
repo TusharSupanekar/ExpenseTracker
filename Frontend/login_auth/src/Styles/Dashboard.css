@@ -1027,6 +1027,16 @@ body[data-theme='dark'] {
   --teal-dark: #99f6e4;
   --gold: #fbbf24;
   background: var(--paper);
+  overflow-x: hidden;
+}
+
+.app-shell #sidebar {
+  background: #0f2422;
+  color: #dbe8e5;
+}
+
+body[data-theme='dark'] .app-shell #sidebar {
+  background: #0b1b1a;
 }
 
 body[data-theme='dark'] .app-shell .header {
