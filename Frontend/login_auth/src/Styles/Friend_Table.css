@@ -1,0 +1,90 @@
+
+/* Main Container */
+.main-cards-1 {
+    width: 60%;
+    margin: 80px auto;
+    padding: 20px;
+    background-color: #2a382a;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Friends Table */
+.friends-table {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+.friends-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 2px solid #007bff;
+    background-color: beige;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Column Titles */
+.column-title {
+    flex: 1;
+    text-align: left;
+    padding: 0 10px;
+    color: #2a382a;
+}
+
+/* Card Row Styling */
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+/* Alternating Row Colors */
+.card-row:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+/* Hover Effect */
+.card-row:hover {
+    background-color: #e0f7fa;
+}
+
+/* Text Styling */
+.friend-name,
+.friend-email {
+    flex: 1;
+    padding: 0 10px;
+    word-wrap: break-word;
+    color:#2a382a;
+}
+
+/* No Friends Message */
+p {
+    text-align: center;
+    color: #888;
+    font-size: 18px;
+    padding: 20px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-cards {
+        width: 90%;
+    }
+    .friends-header,
+    .card-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .column-title,
+    .friend-name,
+    .friend-email {
+        padding: 5px 0;
+    }
+}

@@ -1,0 +1,127 @@
+.navbar {
+    width: 100vw;
+    height: 70px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: #2a382a;
+}
+
+.navbar a {
+    color: green;
+    margin-right: 40px;
+    font-size: 20px;
+}
+
+.navbar a:hover {
+    color: #88975e;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.span1{
+    color: #88975e;
+}
+
+.span2{
+    color:#3F4B3F;
+}
+
+.span3{
+    color: green;
+}
+.Welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+
+
+h3{
+    margin-top: 10px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #88975e;
+}
+
+.card1 {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 250px;
+    border: 2px #3F4B3F solid;
+    border-radius: 10px;
+    background-color: #d0e0a1;
+}
+
+.card1 p{
+    margin: 0px;
+    display: block;
+    color: #2a382a;
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.card {
+    background-color: #d6e0b3;
+    border-radius: 8px;
+    border: 1px #2a382a solid;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 250px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+ol {
+    padding-left: 20px; /* Align bullet points with the text */
+    margin-top: 0;
+}
+
+button {
+    margin-top: auto;
+    padding: 5px 10px;
+    border: none;
+    height: 30px;
+    background-color: #2a382a;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #88975e;
+}
+

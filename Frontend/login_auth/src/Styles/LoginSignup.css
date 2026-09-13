@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body{
+    background-color: beige;
+}
+
+h1 {
+    color: blue;
+}
+
+.container {
+    display: flex;
+    background-color: beige;
+
+}
+
+.div1 {
+    background-color: beige;
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse; /* This aligns the content to the right */
+    align-items: center;
+    background-color: #2a382a;
+    padding-right: 40px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px; /* Adds spacing between the links */
+    padding-right: 40px;
+}
+
+.navbar a {
+    color: beige;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: #88975e;
+}
+
+.div2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: beige;
+    height: 100vh;
+    width: 50vw;
+}
+
+.login {
+    height: 600px;
+    width: 500px;
+    background-color: white;
+    color: beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid #88975e;
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.3);
+}
+
+.field {
+    height: 50px;
+    width: 300px;
+    display: block;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.button {
+    height: 50px;
+    width: 150px;
+    display: block;
+    margin-bottom: 50px;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #2a382a;
+    color: white;
+}
+
+.login h2 {
+    margin-top: 30px;
+    display: block;
+    color: #88975e;
+}
+
+img {
+    width: 700px;
+    height:400px;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.error-message {
+    color: red;           /* Red color for errors */
+    font-size: 12px;      /* Smaller font size */
+    margin-top: 5px;      /* Add space between the input and error */
+    display: block;       /* Ensure it displays on a new line */
+}
