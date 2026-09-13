@@ -13,7 +13,7 @@ mongoose.connect("mongodb+srv://khandveatharva:iaFF0hn0155xThPs@cluster0.9e3op.m
 app.use(express.json()) //this will pass the incoming json data from the user
 
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173']
 }));
 app.use("/", router);
 

@@ -14,6 +14,7 @@ function Signup(){
   const[password,setPassword]=useState()
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
+  const [submitError, setSubmitError] = useState('')
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -59,22 +60,28 @@ function Signup(){
   };
 
 
-  const handleSubmit=(e)=>{
-    
-      e.preventDefault()
-      if(validateForm()){
-      axios.post('http://localhost:3000/api/users/register',{email, password, username})
-      .then(result=>{
-        if(result.data["email"]){
-          const user = result.data.id;
-          axios.post('http://localhost:3000/api/users/profile', {
-            params: {
-              user
-            }
-          })
-            .then(result=>{console.log(result)}).catch(e=>console.log(e));
-        }
-      }).catch(err=>console.log(err))
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitError('');
+
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      const result = await axios.post('http://localhost:3000/api/users/register', {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (result.data.email) {
+        navigate('/Login');
+      } else {
+        setSubmitError('Registration failed. Please try again.');
+      }
+    } catch (err) {
+      setSubmitError(err.response?.data?.message || 'Registration failed. Please try again.');
     }
   }
 
@@ -139,6 +146,10 @@ function Signup(){
                           value={formData.confirmPassword}
                           placeholder="Confirm password"
                           onChange={handleChange}/>
+
+                          {submitError && (
+                            <span className="error-message">{submitError}</span>
+                          )}
                           
 
                           <input className="button" type="submit" value="Sign Up"/>
