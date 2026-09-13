@@ -1,61 +1,125 @@
-/* Sidebar  */
+/* Sidebar */
 #sidebar {
-    grid-area: sidebar;
-    height: 100%;
-    background-color: beige;
-    overflow-y: auto;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
+  grid-area: sidebar;
+  height: 100%;
+  overflow-y: auto;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.sidebar-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 32px;
+  margin: 0;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  color: #18312f;
+  background: #f59e0b;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.sidebar-brand .menu {
+  margin: 0;
+  color: #f6fbf9;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.sidebar-close {
+  display: none;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: #b9ceca;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sidebar-close:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-list {
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-list-item {
+  padding: 4px 0;
+}
+
+.sidebar-list-item .btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  height: 48px;
+  padding: 0 16px;
+  color: #b9ceca;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sidebar-list-item .btn:hover,
+.sidebar-list-item .btn:focus-visible {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.sidebar-list-item .btn .icon {
+  width: 18px;
+  margin: 0;
+  font-size: 17px;
+}
+
+.theme-item {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(219, 232, 229, 0.14);
+}
+
+.sidebar-scrim {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .sidebar-close {
+    display: grid;
   }
-  
-  .sidebar-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px 0px 30px;
-    margin-bottom: 30px;
+
+  .sidebar-scrim.visible {
+    position: fixed;
+    inset: 0;
+    z-index: 19;
+    display: block;
+    background: rgba(15, 23, 42, 0.42);
   }
-  
-  .sidebar-title > span {
-    display: none;
-  }
-  
-  .sidebar-brand {
-    margin-top: 15px;
-    font-size: 20px;
-    font-weight: 700;
-  }
-  
-  .sidebar-list {
-    padding: 0;
-    list-style-type: none;
-  }
-  
-  .sidebar-list-item {
-    padding: 30px 30px 30px 30px;
-    font-size: 18px;
-  }
-  
-  .sidebar-list-item:hover {
-    background-color: #748d92;
-    cursor: pointer;
-  }
-  
-  .sidebar-list-item > a {
-    text-decoration: none;
-    color: beige;
-  }
-  
-  .sidebar-responsive {
-    display: inline !important;
-    position: absolute;
-    /*
-      we want the z-index of the sidebar higher so that
-      the charts are not showing over the sidebar 
-      on small screens
-    */
-    z-index: 12 !important;
-  }
-  
-  /* End Sidebar  */
+}
   

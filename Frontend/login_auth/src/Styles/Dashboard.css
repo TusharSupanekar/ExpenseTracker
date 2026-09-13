@@ -1017,6 +1017,72 @@ select {
   }
 }
 
+body[data-theme='dark'] {
+  --ink: #e5efec;
+  --muted: #9db2ae;
+  --paper: #101918;
+  --surface: #172321;
+  --line: #2b3b38;
+  --teal: #5eead4;
+  --teal-dark: #99f6e4;
+  --gold: #fbbf24;
+  background: var(--paper);
+}
+
+body[data-theme='dark'] .app-shell .header {
+  background: rgba(16, 25, 24, 0.94);
+}
+
+body[data-theme='dark'] .summary-card,
+body[data-theme='dark'] .panel,
+body[data-theme='dark'] .ledger-card,
+body[data-theme='dark'] .resource-card,
+body[data-theme='dark'] .friend-row,
+body[data-theme='dark'] .transaction-card {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+body[data-theme='dark'] .resource-card:hover {
+  border-color: #39746c;
+}
+
+body[data-theme='dark'] .budget-form,
+body[data-theme='dark'] .modal-surface input,
+body[data-theme='dark'] .modal-surface select {
+  color: var(--ink);
+  background: #1d2c29;
+  border-color: var(--line);
+}
+
+body[data-theme='dark'] .modal-surface {
+  background: var(--surface);
+}
+
+body[data-theme='dark'] .modal-surface h2,
+body[data-theme='dark'] .modal-surface label,
+body[data-theme='dark'] .modal-surface input,
+body[data-theme='dark'] .modal-surface select {
+  color: var(--ink);
+}
+
+body[data-theme='dark'] .budget-form button {
+  color: var(--teal-dark);
+  background: #21443e;
+  border-color: var(--line);
+}
+
+body[data-theme='dark'] .secondary-button {
+  color: var(--teal);
+  border-color: #39746c;
+}
+
+body[data-theme='dark'] .transaction-category {
+  color: #b9f7ed;
+  background: #21443e;
+}
+
 .Welcome {
   display: flex;
   background-color: #88975e;
