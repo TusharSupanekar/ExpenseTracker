@@ -33,6 +33,80 @@ const userCtrl = {
 
         res.json({username: userCreated.username, email: userCreated.email, id: userCreated.id});
     }),
+    addPersonalExpense: asynchandler(async (req, res) => {
+        const {userId, description, category, amount} = req.body;
+        if(!userId || !description || !category || Number(amount) <= 0){
+            return res.status(400).json({message: "Description, category, and a positive amount are required"});
+        }
+
+        const transaction = await Transactions.create({
+            user: userId,
+            includedMember: userId,
+            description,
+            category,
+            amount: Number(amount)
+        });
+
+        await CategorySpends.findOneAndUpdate(
+            {user: userId, category},
+            {$inc: {totalAmountSpent: Number(amount)}},
+            {upsert: true}
+        );
+
+        res.status(201).json({transaction});
+    }),
+    getPersonalExpenses: asynchandler(async (req, res) => {
+        const expenses = await Transactions.find({user: req.query.user, includedMember: req.query.user})
+            .populate('category')
+            .sort({date: -1})
+            .limit(50);
+        res.json({expenses});
+    }),
+    getCategories: asynchandler(async (req, res) => {
+        const categories = await TransactionCategories.find().sort({name: 1});
+        res.json({categories});
+    }),
+    getLedgerSummary: asynchandler(async (req, res) => {
+        const userId = new mongoose.Types.ObjectId(req.query.user);
+        const ledgerEntries = await GroupLedger.find({
+            $or: [{paidby: userId}, {owedby: userId}]
+        }).populate('paidby owedby', 'username email');
+
+        const people = {};
+        let totalOwed = 0;
+        let totalLent = 0;
+
+        ledgerEntries.forEach((entry) => {
+            const isPayer = entry.paidby._id.equals(userId);
+            const otherPerson = isPayer ? entry.owedby : entry.paidby;
+            const amount = Number(entry.amount || 0);
+            const personId = otherPerson._id.toString();
+
+            if (!people[personId]) {
+                people[personId] = {user: otherPerson, amount: 0};
+            }
+
+            people[personId].amount += isPayer ? amount : -amount;
+            if (isPayer) totalLent += amount;
+            else totalOwed += amount;
+        });
+
+        const balances = Object.values(people)
+            .filter((entry) => entry.amount !== 0)
+            .map((entry) => ({
+                ...entry,
+                direction: entry.amount > 0 ? 'owed-to-you' : 'you-owe',
+                amount: Math.abs(entry.amount)
+            }))
+            .sort((first, second) => second.amount - first.amount);
+
+        res.json({
+            totalOwed,
+            totalLent,
+            netBalance: totalLent - totalOwed,
+            balances
+        });
+    }),
     //Login
     login: asynchandler(async (req, res) => {
         const {username, email, password} = req.body;

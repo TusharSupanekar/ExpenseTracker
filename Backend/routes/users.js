@@ -9,6 +9,10 @@ const router = express.Router();
 
 
 router.post('/api/users/register', userCtrl.register);
+router.post('/api/users/add-expense', userCtrl.addPersonalExpense);
+router.get('/api/users/expenses', userCtrl.getPersonalExpenses);
+router.get('/api/users/categories', userCtrl.getCategories);
+router.get('/api/users/ledger-summary', userCtrl.getLedgerSummary);
 router.post('/api/users/login', userCtrl.login);
 router.post('/api/users/add-friend', userCtrl.addFriend);
 router.post('/api/users/display-friends', userCtrl.displayFriends);
