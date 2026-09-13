@@ -9,7 +9,7 @@ const GroupsCtrl = {
         const user = new mongoose.Types.ObjectId(req.body.user);
         console.log(user);
         const userGroups = await UserGroups.findOne({user}).populate({path: "groups", populate:{path: "members", select:"username email"}});
-        req.body.UserGroups = userGroups.groups;
+        req.body.UserGroups = userGroups?.groups || [];
         next();
     },
     fetchAmountInvestedInGroup: async (req, res, next) => {

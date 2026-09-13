@@ -1,7 +1,6 @@
-import React from "react";
 import '../Styles/LoginSignup.css'
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios'
+import api from '../api';
 import { useState } from "react";
 import logo from '../images/logo.png'
 import Cookies from 'js-cookie';
@@ -9,47 +8,35 @@ import Cookies from 'js-cookie';
 
 function Login(){
 
-  const[action,setAction]=useState("Login");
   const[email,setEmail] = useState()
-  const[username,setUsername] = useState()
   const[password,setPassword]=useState()
   const navigate = useNavigate()
-  const [errors, setErrors] = useState({})
+  const [loginError, setLoginError] = useState('')
 
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    // Send login request with email and password
-    axios
-      .post('http://localhost:3000/api/users/login', { email, password })
+
+    setLoginError('');
+
+    api
+      .post('/login', { email, password })
       .then((result) => {
         if (result.data['email']) {
           const userId = result.data.id;
           const username = result.data.username;
-  
-          // Store user session data in cookies
-          Cookies.set('userId', userId, { expires: 7 });  // Cookie expires in 7 days
+
+          Cookies.set('userId', userId, { expires: 7 });
           Cookies.set('username', username, { expires: 7 });
-  
-          // Send another request to fetch the user's profile using userId
-          return axios.get('http://localhost:3000/api/users/profile', {
-            params: { user: userId }, // Pass userId as a param
-          });
+
+          navigate('/home');
         } else {
           throw new Error('Invalid Credentials');
         }
       })
-      .then((profileResult) => {
-        // Log profile data
-        console.log(profileResult);
-        
-        // After successful login and profile fetch, navigate to the dashboard
-        navigate('/home');
-      })
       .catch((err) => {
-        console.log('Error:', err.message);
+        setLoginError(err.response?.data?.message || 'Invalid email or password.');
       });
   };
 
@@ -67,7 +54,7 @@ function Login(){
               </div>
               <div className="div2">
                   <div className="login">
-                      <h2>{action}</h2>
+                      <h2>Login</h2>
                       <form onSubmit={handleSubmit}>
                           <input className="field" 
                                  type="email" 
@@ -80,6 +67,9 @@ function Login(){
                                 name="password" 
                                 placeholder="Enter your password here" 
                                 onChange={(e) =>setPassword(e.target.value)}/>
+                          {loginError && (
+                            <span className="error-message">{loginError}</span>
+                          )}
                           <input 
                                 className="button" 
                                 type="submit" 

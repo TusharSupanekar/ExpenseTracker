@@ -10,6 +10,7 @@ const GroupTransactions = require('../models/GroupTransactions');
 const TransactionCategories = require('../models/TransactionCategories');
 const CategorySpends = require('../models/CategorySpends');
 const GroupLedger = require('../models/GroupLedger');
+const UserGroups = require('../models/UserGroups');
 
 const userCtrl = {
 
@@ -37,7 +38,7 @@ const userCtrl = {
         const {username, email, password} = req.body;
         const userExists = await User.findOne({email});
         if(userExists){
-            const isMatch = bcrypt.compare(password, userExists.password)
+            const isMatch = await bcrypt.compare(password, userExists.password)
             if(isMatch){
                 const token = jwt.sign({id: userExists._id}, 'anykey', {expiresIn: '30d'})
 
@@ -92,7 +93,7 @@ const userCtrl = {
         }else{
             const friendIsUser = await User.findOne({email: Friendemail})
             if(!friendIsUser){
-                res.json({message: "This person does not exist. Please check the email id."})
+                return res.json({message: "This person does not exist. Please check the email id."})
             }
             const newFriendship = await Friends.create({
                 user: UserId,
@@ -131,9 +132,15 @@ const userCtrl = {
 
         const group = await Groups.create({
             groupName: groupName,
-            members: [],
+            members: [userId],
             admin: userId
         });
+
+        await UserGroups.findOneAndUpdate(
+            {user: userId},
+            {$addToSet: {groups: group._id}},
+            {upsert: true, new: true}
+        );
 
         const populatedGroup = await Groups.findById(group._id).populate('admin', 'username email');
 

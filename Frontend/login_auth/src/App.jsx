@@ -1,13 +1,12 @@
 import Signup from './LoginForm/Signup';
 import Login from './LoginForm/Login'
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import Groups from './Pages/Groups'
-import Friends from './Pages/Friends'
+import Groups from './Pages/ModernGroups'
+import Friends from './Pages/ModernFriends'
 import Dashboard from './Pages/Dashboard'
-import Home from './Pages/Home'
-import Group from './Pages/Group'
+import Home from './Pages/ModernHome'
+import ModernGroup from './Pages/ModernGroup'
 function App() {
   return (
     <BrowserRouter>
@@ -29,7 +28,7 @@ function App() {
           <Friends/>
         }/>
         <Route path='/Group' element={
-          <Group/>
+          <ModernGroup/>
         }/>
       </Routes>
     </BrowserRouter>

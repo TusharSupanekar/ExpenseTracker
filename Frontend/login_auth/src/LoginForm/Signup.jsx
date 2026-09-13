@@ -1,17 +1,12 @@
-import React from "react";
 import '../Styles/LoginSignup.css'
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios'
+import api from '../api';
 import { useState } from "react";
 import logo from '../images/logo.png'
-import password_icon from '../images/password.png'
 
 function Signup(){
 
   
-  const[email,setEmail] = useState()
-  const[username,setUsername] = useState()
-  const[password,setPassword]=useState()
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
   const [submitError, setSubmitError] = useState('')
@@ -69,7 +64,7 @@ function Signup(){
     }
 
     try {
-      const result = await axios.post('http://localhost:3000/api/users/register', {
+      const result = await api.post('/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password,
@@ -108,9 +103,7 @@ function Signup(){
                           name="username" 
                           value = {formData.username}
                           placeholder="Enter your username here" 
-                          onChange={(e) =>{
-                          setUsername(e.target.value); 
-                          handleChange(e);}}/>
+                          onChange={handleChange}/>
                           {errors.username && (
                                 <span className="error-message">{errors.username}</span>
                           )}
@@ -121,8 +114,7 @@ function Signup(){
                           name="email" 
                           value = {formData.email}
                           placeholder="Enter your email here" 
-                          onChange={(e) =>{
-                          setEmail(e.target.value);handleChange(e)}}/>
+                          onChange={handleChange}/>
                             {errors.email && (
                                 <span className="error-message">{errors.email}</span>
                             )}
@@ -133,8 +125,7 @@ function Signup(){
                           name="password" 
                           value = {formData.password}
                           placeholder="Enter your password here" 
-                          onChange={(e) =>{
-                          setPassword(e.target.value);handleChange(e)}}/>
+                          onChange={handleChange}/>
                             {errors.password && (
                               <span className="error-message">{errors.password}</span>
                           

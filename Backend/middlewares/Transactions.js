@@ -41,7 +41,7 @@ const TransactionsCtrl = {
             },
             {
               $group: {
-                _id: { month: { $month: "$user" }}, // Group by month and year
+                _id: { year: { $year: "$date" }, month: { $month: "$date" }}, // Group by transaction month and year
                 totalAmount: { $sum: "$amount" } // Sum the amount for each group
               }
             },
