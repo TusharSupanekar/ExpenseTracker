@@ -1088,6 +1088,15 @@ body[data-theme='dark'] .secondary-button {
   border-color: #39746c;
 }
 
+body[data-theme='dark'] .primary-button {
+  color: #e6fffa;
+  background: #246a63;
+}
+
+body[data-theme='dark'] .primary-button:hover {
+  background: #2f8177;
+}
+
 body[data-theme='dark'] .transaction-category {
   color: #b9f7ed;
   background: #21443e;
