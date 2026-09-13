@@ -73,6 +73,16 @@ function ModernHome() {
     labels: ['Spent', 'Remaining'],
     datasets: [{ data: [currentSpent, remainingBudget], backgroundColor: ['#f59e0b', '#dcebe7'], borderWidth: 0, hoverOffset: 0 }],
   };
+  const moneyFlowData = {
+    labels: ['Owed to you', 'You owe'],
+    datasets: [{
+      label: 'Amount',
+      data: [Number(ledger.totalLent || 0), Number(ledger.totalOwed || 0)],
+      backgroundColor: ['#0f766e', '#e11d48'],
+      borderRadius: 7,
+      barThickness: 30,
+    }],
+  };
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -96,6 +106,19 @@ function ModernHome() {
     circumference: 180,
     cutout: '78%',
     plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => ` $${Number(context.raw).toFixed(2)}` } } },
+  };
+  const moneyFlowOptions = {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: (context) => ` $${Number(context.raw).toFixed(2)}` } },
+    },
+    scales: {
+      x: { beginAtZero: true, grid: { color: '#e5e7eb' }, ticks: { callback: (value) => `$${value}` } },
+      y: { grid: { display: false } },
+    },
   };
 
   const saveBudget = (event) => {
@@ -155,6 +178,7 @@ function ModernHome() {
               <article className="panel chart-panel budget-panel"><div className="panel-heading"><div><p className="eyebrow">MONTHLY PLAN</p><h2>Budget health</h2></div><form className="budget-form" onSubmit={saveBudget}><span>$</span><input aria-label="Monthly budget" type="number" min="1" step="1" value={budgetInput} onChange={(event) => setBudgetInput(event.target.value)} /><button type="submit">Set</button></form></div><div className="budget-gauge"><Doughnut data={budgetData} options={budgetOptions} /><div className="gauge-label"><strong>${currentSpent.toFixed(0)}</strong><span>of ${monthlyBudget.toFixed(0)} spent</span></div></div><div className="budget-footer"><span><i className="spent-dot" />{budgetPercent.toFixed(0)}% used</span><strong>${remainingBudget.toFixed(2)} left</strong></div></article>
               <article className="panel chart-panel"><div className="panel-heading"><div><p className="eyebrow">BREAKDOWN</p><h2>Top categories</h2></div></div><div className="chart-wrap doughnut-wrap">{topCategories.length ? <Doughnut data={categoryData} options={chartOptions} /> : <p className="empty-state">Add a group expense to see category data here.</p>}</div></article>
               <article className="panel chart-panel wide-panel"><div className="panel-heading"><div><p className="eyebrow">TREND</p><h2>Monthly spending</h2></div></div><div className="chart-wrap"><Bar data={monthlyData} options={barOptions} /></div></article>
+              <article className="panel chart-panel wide-panel"><div className="panel-heading"><div><p className="eyebrow">GROUP POSITION</p><h2>Money flow</h2></div></div><div className="chart-wrap money-flow-wrap"><Bar data={moneyFlowData} options={moneyFlowOptions} /></div></article>
             </section>
           </>
         )}
